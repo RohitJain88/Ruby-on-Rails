@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rohit Jain</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class='<%= controller.controller_name%>'>
+  <div id="banner">
+    <%= image_tag("logo.jpg", class: 'logo') %>
+    <%= @page_title || "Movies" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <div id="cart">
+        <%= render @cart %> 
+      </div> 
+
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/question">Questions</a></li>
+        <li><a href="/news">Events</a></li> 
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <% if session[:user_id] %>
+        <ul>
+          <li><%= link_to 'Orders', orders_path %></li> 
+          <li><%= link_to 'Products', products_path %></li> 
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+      <% end %>
+      <ul>
+        <li><a href="/login">Login</a></li> 
+        <% if session[:user_id] %>
+          <li><%= link_to "Logout", logout_path, method: :delete %></li>
+        <% end %>
+      </ul>
+
+    </div>
+    <div id="main" class="products">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
